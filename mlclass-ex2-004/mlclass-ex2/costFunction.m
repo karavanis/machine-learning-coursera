@@ -7,30 +7,6 @@ function [J, grad] = costFunction(theta, X, y)
 % Initialize some useful values
 m = length(y); % number of training examples
 
-% You need to return the following variables correctly
-grad = zeros(size(theta));
-
-% ====================== YOUR CODE HERE ======================
-% Instructions: Compute the cost of a particular choice of theta.
-%               You should set J to the cost.
-%               Compute the partial derivatives and set grad to the partial
-%               derivatives of the cost w.r.t. each parameter in theta
-%
-% Note: grad should have the same dimensions as theta
-%
-
 J = sum(-y' .* log(sigmoid(theta' * X')) - (1 - y') .* log(1 - sigmoid((theta' * X')))) / m;
-
-
-% for iter = 1:num_iters
-%     theta = theta - (alpha / m)  * ((theta' * X' - y') * X)';
-
-%     % Save the cost J in every iteration
-%     J_history(iter) = computeCost(X, y, theta);
-% end
-
-
-
-% =============================================================
-
+grad = ((sigmoid(theta' * X') - y') * X)' / m;
 end
