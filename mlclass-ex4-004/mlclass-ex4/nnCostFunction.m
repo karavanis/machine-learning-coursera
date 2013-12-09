@@ -48,7 +48,9 @@ a3 = sigmoid(z3);
 
 J = sum(sum(-Y .* log(a3) - (1 - Y) .* log(1 - a3))) / m;
 
+regularization_term = lambda * (sum(sum(Theta1(:, 2: input_layer_size + 1) .^ 2)) + sum(sum(Theta2(:, 2: hidden_layer_size + 1) .^ 2))) / (2 * m);
 
+J = J + regularization_term;
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
