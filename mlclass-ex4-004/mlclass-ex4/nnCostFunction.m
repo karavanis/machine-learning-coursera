@@ -55,9 +55,13 @@ J = J + regularization_term;
 d3 = a3 - Y;
 d2 = d3 * Theta2(:, 2: end) .* sigmoidGradient(z2);
 
-Theta2_grad = d3' * a2 / m;
-Theta1_grad = d2' * a1 / m;
+Theta2_grad = (d3' * a2 + lambda .* [zeros(size(Theta2, 1), 1) Theta2(:, 2:end)]) / m;
+Theta1_grad = (d2' * a1 + lambda .* [zeros(size(Theta1, 1), 1) Theta1(:, 2:end)]) / m;
 
+% size(Theta2)
+% size(Theta2_grad)
+% size(Theta2,1)
+% size(Theta2,2)
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
 end
