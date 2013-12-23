@@ -60,6 +60,4 @@ Theta1_grad = d2' * a1 / m;
 
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
-
 end
