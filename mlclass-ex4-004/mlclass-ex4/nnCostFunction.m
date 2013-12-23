@@ -48,10 +48,17 @@ a3 = sigmoid(z3);
 
 J = sum(sum(-Y .* log(a3) - (1 - Y) .* log(1 - a3))) / m;
 
-regularization_term = lambda * (sum(sum(Theta1(:, 2: input_layer_size + 1) .^ 2)) + sum(sum(Theta2(:, 2: hidden_layer_size + 1) .^ 2))) / (2 * m);
+regularization_term = lambda * (sum(sum(Theta1(:, 2: end) .^ 2)) + sum(sum(Theta2(:, 2: end) .^ 2))) / (2 * m);
 
 J = J + regularization_term;
 
+d3 = a3 - Y;
+d2 = d3 * Theta2(:, 2: end) .* sigmoidGradient(z2);
+
+Theta2_grad = d3' * a2 / m;
+Theta1_grad = d2' * a1 / m;
+
+% grad = [D1(:); D2(:)];
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
 %               following parts.
