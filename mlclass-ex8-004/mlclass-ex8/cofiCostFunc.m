@@ -19,6 +19,14 @@ Theta_grad = zeros(size(Theta));
 M = (X * Theta' - Y) .^ 2;
 J = sum(sum(R .* M)) / 2;
 
+for i = 1:num_movies
+  X_grad(i, :) = (R(i, :) .* (X(i, :) * Theta' - Y(i, :)) * Theta);
+end
+
+for j = 1:num_users
+  Theta_grad(j, :) = (R(:, j)' .* (Theta(j, :) * X' - Y(:, j)') * X);
+end
+
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost function and gradient for collaborative
 %               filtering. Concretely, you should first implement the cost
