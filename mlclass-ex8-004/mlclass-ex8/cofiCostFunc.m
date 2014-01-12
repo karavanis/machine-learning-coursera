@@ -17,7 +17,7 @@ X_grad = zeros(size(X));
 Theta_grad = zeros(size(Theta));
 
 M = (X * Theta' - Y) .^ 2;
-J = sum(sum(R .* M)) / 2;
+J = sum(sum(R .* M)) / 2 + lambda / 2 * sum(sum(Theta .^ 2)) + lambda / 2 * sum(sum(X .^ 2));
 
 for i = 1:num_movies
   X_grad(i, :) = (R(i, :) .* (X(i, :) * Theta' - Y(i, :)) * Theta);
